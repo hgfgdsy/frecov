@@ -49,7 +49,6 @@ int main(int argc, char *argv[]) {
 		  int tof = offset + i*pace + 32*j;
 		  if(buf[tof+8]=='B'&&buf[tof+9]=='M'&&buf[tof+10]=='P'){
 			  short low,high;
-			  printf("hello\n");
 			  low = *(short *)&buf[tof+0x1a];
 			  high = *(short *)&buf[tof+0x14];
 			  int ihigh = high;
@@ -67,6 +66,7 @@ int main(int argc, char *argv[]) {
 			  int ncnt = 0;
 			  int label = 0;
 			  char last;
+			  printf("hello\n");
 			  while(tempj>=0){
 				  int tempoff = tof-(j-tempj)*32;
 				  for(int i=0;i<5;i++){
