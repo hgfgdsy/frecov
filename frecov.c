@@ -85,6 +85,7 @@ int main(int argc, char *argv[]) {
 					  label=1;
 					  break;
 				  }
+				  tempj--;
 			  }
 			  if(label==0) continue;
 			  printf("%s\n",fname);
