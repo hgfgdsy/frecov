@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 			  low = *(short *)&buf[tof+0x1a];
 			  high = *(short *)&buf[tof+0x14];
 			  int ihigh = high;
-			  int cof = ihigh<<16 + low;
+			  int cof = (ihigh<<16) + low;
 			  if(cof == 0) continue;
 			  cof-=2;
 			  int picture = offset + pace*cof;
