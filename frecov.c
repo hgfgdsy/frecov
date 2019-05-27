@@ -114,10 +114,10 @@ int main(int argc, char *argv[]) {
 				  char shx[40];
 				  dup2(pps[0],0);
 				  scanf("%s",shx);
-				  char rub;
-				  scanf("%c",&rub);
+				  char rub[1];
+				  scanf("%s",rub);
 				  close(pps[1]);
-//				  printf("%s    ",shx); 
+				  printf("%s    ",shx); 
 				  printf("%s\n",fname);
 			  }
 			  //printf("%s\n",fname);
