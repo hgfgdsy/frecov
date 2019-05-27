@@ -45,7 +45,6 @@ int main(int argc, char *argv[]) {
   int pace = BPW*WPC;
   int my_pace = pace/32;
   char fname[400];
-  char shx[40];
   for(int i=0;i<my_total;i++){
 	  for(int j=0;j<my_pace;j++){
 		  int tof = offset + i*pace + 32*j;
@@ -112,12 +111,13 @@ int main(int argc, char *argv[]) {
 				  write(fildes[1],phead,psize);
 				  close(fildes[1]);
 				  wait(NULL);
+				  char shx[40];
 				  dup2(pps[0],0);
 				  scanf("%s",shx);
 				  shx[20] = '\0';
 				  close(pps[1]);
-				  printf("%s    ",shx);
-				  printf("%s\n",fname);
+				  printf("%s",shx);
+				  printf("    %s\n",fname);
 			  }
 			  //printf("%s\n",fname);
 		  }
