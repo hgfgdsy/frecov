@@ -9,6 +9,7 @@
 
 char *buf;
 int fildes[2];
+extern void **environ;
 
 int main(int argc, char *argv[]) {
   int fd = open("filesystem/fs.img",O_RDONLY);
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
   int pace = BPW*WPC;
   int my_pace = pace/32;
   char fname[400];
-//  char shx[40];
+  char shx[40];
   for(int i=0;i<my_total;i++){
 	  for(int j=0;j<my_pace;j++){
 		  int tof = offset + i*pace + 32*j;
@@ -57,13 +58,13 @@ int main(int argc, char *argv[]) {
 			  if(cof == 0) continue;
 			  cof-=2;
 			  unsigned int picture = offset + pace*cof;
-			  printf("picture = %x %x\n",picture,low);
+//			  printf("picture = %x %x\n",picture,low);
 			  if(buf[picture]!='B' || buf[picture+1]!='M')
 				  continue;
 			  int psize = *(int *)&buf[picture+2];
 			  int fsize = *(int *)&buf[tof+0x1c];
 			  if(psize!=fsize) continue;
-//			  void *phead = (void *)&buf[picture];
+			  void *phead = (void *)&buf[picture];
 			  int tempj = j-1;
 			  int ncnt = 0;
 			  int label = 0;
@@ -89,12 +90,40 @@ int main(int argc, char *argv[]) {
 				  tempj--;
 			  }
 			  if(label==0) continue;
-			  printf("%s\n",fname);
+			  int fildes[2];
+			  int pps[2];
+			  pipe(fildes);
+			  pipe(pps);
+			  char *my_arg[10] = {"sha1sum"};
+			  my_arg[1] = NULL;
+			  pid_t pid = fork();
+			  if(pid == 0) {
+				  close(fildes[1]);
+				  dup2(fildes[0],0);
+				  dup2(pps[1],1);
+				  close(pps[0]);
+				  execve("/usr/bin/sha1sum",my_arg,environ);
+				  close(fildes[0]);
+				  close(pps[1]);
+			  }
+			  else {
+				  close(fildes[0]);
+				  write(fildes[1],phead,psize);
+				  clsoe(fildes[1]);
+				  wait(NULL);
+				  dup2(pps[0],0);
+				  scanf("%s",shx);
+				  close(pps[1]);
+				  printf("%s    %s\n",shx,fname);
+			  }
+			  //printf("%s\n",fname);
 		  }
 		  else {
 			  continue;
 		  }
 	  }
   }
+  munmap((void *)buf,1<<27);
+  close(fd);
   return 0;
 }
