@@ -51,12 +51,12 @@ int main(int argc, char *argv[]) {
 			  short low,high;
 			  low = *(short *)&buf[tof+0x1a];
 			  high = *(short *)&buf[tof+0x14];
-			  int ihigh = high;
-			  int cof = (ihigh<<16) + low;
+		          int ihigh = ((int)high)<<16;
+			  int cof = ihigh + low;
 			  if(cof == 0) continue;
 			  cof-=2;
 			  int picture = offset + pace*cof;
-			  printf("picture = %x %x %x\n",picture,cof,ihigh<<16);
+			  printf("picture = %x\n",picture);
 			  if(buf[picture]!='B' || buf[picture+1]!='M')
 				  continue;
 			  int psize = *(int *)&buf[picture+2];
