@@ -65,18 +65,22 @@ int main(int argc, char *argv[]) {
 			  int tempj = j-1;
 			  int ncnt = 0;
 			  int label = 0;
+			  char last;
 			  while(tempj>=0){
 				  int tempoff = tof-(j-tempj)*32;
 				  for(int i=0;i<5;i++){
+					  last = buf[tempoff + i*2 + 1];
 					  if(buf[tempoff + i*2+1]!=0xff)
 					          fname[ncnt++]=buf[tempoff + i*2+1];
 
 				  }
 				  for(int i=0xe;i<0x19;i+=2){
+                                          last = buf[tempoff + i];
 					  if(buf[tempoff + i]!=0xff)
 						  fname[ncnt++]=buf[tempoff +i];
 				  }
 				  for(int i=0x1c;i<0x1f;i+=2){
+					  last = buf[tempoff + i];
 					  if(buf[tempoff + i]!=0xff)
 						  fname[ncnt++]=buf[tempoff +i];
 				  }
@@ -87,6 +91,7 @@ int main(int argc, char *argv[]) {
 				  }
 				  tempj--;
 			  }
+			  if(last == 0xff) continue;
 			  if(label==0) continue;
 			  printf("%s\n",fname);
 		  }
