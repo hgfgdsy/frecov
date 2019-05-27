@@ -114,8 +114,8 @@ int main(int argc, char *argv[]) {
 				  char shx[40];
 				  dup2(pps[0],0);
 				  scanf("%s",shx);
-				  char rub[1];
-				  scanf("%s",rub);
+				  char r1,r2,r3;
+				  scanf("%c%c%c",&r1,&r2,&r3);
 				  close(pps[1]);
 				  printf("%s    ",shx); 
 				  printf("%s\n",fname);
