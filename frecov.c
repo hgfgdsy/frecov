@@ -117,7 +117,8 @@ int main(int argc, char *argv[]) {
 				  shx[20] = '\0';
 				  close(pps[1]);
 				  printf("%s",shx);
-				  printf("    %s\n",fname);
+				  printf("     ");
+				  printf("%s\n",fname);
 			  }
 			  //printf("%s\n",fname);
 		  }
