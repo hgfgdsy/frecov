@@ -117,6 +117,7 @@ int main(int argc, char *argv[]) {
 //				  shx[20] = '\0';
 				  close(pps[1]);
 				  printf("%s\n",shx);
+				  printf("EX = %c\n",fname[0]);
 //				  printf("     ");
 //				  printf("%s\n",fname);
 			  }
