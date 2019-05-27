@@ -56,6 +56,7 @@ int main(int argc, char *argv[]) {
 			  if(cof == 0) continue;
 			  cof-=2;
 			  int picture = offset + pace*cof;
+			  printf("picture = %x\n",picture);
 			  if(buf[picture]!='B' || buf[picture+1]!='M')
 				  continue;
 			  int psize = *(int *)&buf[picture+2];
@@ -66,7 +67,6 @@ int main(int argc, char *argv[]) {
 			  int ncnt = 0;
 			  int label = 0;
 			  char last;
-			  printf("hello\n");
 			  while(tempj>=0){
 				  int tempoff = tof-(j-tempj)*32;
 				  for(int i=0;i<5;i++){
