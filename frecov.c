@@ -117,7 +117,7 @@ int main(int argc, char *argv[]) {
 				  char rub;
 				  scanf("%c",&rub);
 				  close(pps[1]);
-				  printf("%s    ",shx); 
+//				  printf("%s    ",shx); 
 				  printf("%s\n",fname);
 			  }
 			  //printf("%s\n",fname);
