@@ -57,7 +57,7 @@ int main(int argc, char *argv[]) {
 			  if(cof == 0) continue;
 			  cof-=2;
 			  int picture = offset + pace*cof;
-			  printf("picture = %x %x %x\n",picture);
+			  printf("picture = %x\n",picture);
 			  if(buf[picture]!='B' || buf[picture+1]!='M')
 				  continue;
 			  int psize = *(int *)&buf[picture+2];
