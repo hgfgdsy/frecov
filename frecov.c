@@ -39,11 +39,11 @@ int main(int argc, char *argv[]) {
   if(size_s != -1) size = size_s;
   else size = size_l;
   printf("%x %x %x\n",size*BPW,WPC,offset);
-  int my_toal = (size-offset/BPW)/WPC;
+  int my_total = (size-offset/BPW)/WPC;
   int pace = BPW*WPC;
   int my_pace = pace/32;
   char fname[400];
-  char shx[40];
+//  char shx[40];
   for(int i=0;i<my_total;i++){
 	  for(int j=0;j<my_pace;j++){
 		  int tof = offset + i*pace + 32*j;
@@ -61,7 +61,7 @@ int main(int argc, char *argv[]) {
 			  int psize = *(int *)&buf[picture+2];
 			  int fsize = *(int *)&buf[tof+0x1c];
 			  if(psize!=fsize) continue;
-			  void *phead = (void *)buf[picture];
+//			  void *phead = (void *)buf[picture];
 			  int tempj = j-1;
 			  int ncnt = 0;
 			  int label = 0;
@@ -86,6 +86,7 @@ int main(int argc, char *argv[]) {
 					  break;
 				  }
 			  }
+			  if(label==0) continue;
 			  printf("%s\n",fname);
 		  }
 		  else {
