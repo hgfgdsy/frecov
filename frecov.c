@@ -48,15 +48,15 @@ int main(int argc, char *argv[]) {
 	  for(int j=0;j<my_pace;j++){
 		  int tof = offset + i*pace + 32*j;
 		  if(buf[tof+8]=='B'&&buf[tof+9]=='M'&&buf[tof+10]=='P'){
-			  short low,high;
-			  low = *(short *)&buf[tof+0x1a];
-			  high = *(short *)&buf[tof+0x14];
-		          int ihigh = 0;
-			  if(high!=0) ihigh = (int)high;
-			  int cof = (ihigh<<16) + low;
+			  unsigned short low,high;
+			  low = *(unsigned short *)&buf[tof+0x1a];
+			  high = *(unsigned short *)&buf[tof+0x14];
+		          unsigned int ihigh = 0;
+			  if(high!=0) ihigh = (unsigned int)high;
+			  unsigned int cof = (ihigh<<16) + low;
 			  if(cof == 0) continue;
 			  cof-=2;
-			  int picture = offset + pace*cof;
+			  unsigned int picture = offset + pace*cof;
 			  printf("picture = %x %x\n",picture,low);
 			  if(buf[picture]!='B' || buf[picture+1]!='M')
 				  continue;
