@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
 				  dup2(pps[0],0);
 				  scanf("%s",shx);
 				  char rub;
-				  scanf("%c",rub);
+				  scanf("%c",&rub);
 				  close(pps[1]);
 				  printf("%s    ",shx); 
 				  printf("%s\n",fname);
