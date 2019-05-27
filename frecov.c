@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
 				  wait(NULL);
 				  dup2(pps[0],0);
 				  scanf("%s",shx);
-				  shx[40] = '\0';
+				  shx[20] = '\0';
 				  close(pps[1]);
 				  printf("%s    %s\n",shx,fname);
 			  }
