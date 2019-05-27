@@ -6,10 +6,11 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 
 char *buf;
 int fildes[2];
-extern void **environ;
+extern char **environ;
 
 int main(int argc, char *argv[]) {
   int fd = open("filesystem/fs.img",O_RDONLY);
@@ -109,7 +110,7 @@ int main(int argc, char *argv[]) {
 			  else {
 				  close(fildes[0]);
 				  write(fildes[1],phead,psize);
-				  clsoe(fildes[1]);
+				  close(fildes[1]);
 				  wait(NULL);
 				  dup2(pps[0],0);
 				  scanf("%s",shx);
